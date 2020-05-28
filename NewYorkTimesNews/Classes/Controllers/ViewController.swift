@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     @IBAction func read(_ sender: UIButton) {
         coreDataManager.readNews { orders in
             guard let orders = orders else { return }
-            orders.forEach { print($0.link) }
+            orders.forEach { print($0.title) }
          }
     }
     
