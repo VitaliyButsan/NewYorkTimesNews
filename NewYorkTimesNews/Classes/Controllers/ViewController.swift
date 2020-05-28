@@ -10,13 +10,30 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    let newsViewModel = NewsViewModel()
+    let coreDataManager = CoreDataManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .gray
         
-        DataManager.shared.getNews(newsType: .getMostViewedNews) { result in
-            result?.results.forEach { print($0.url) }
+        newsViewModel.getNews { result in
+            switch result {
+            case .success(_):
+                let newNews = NewsCoreDataModel(title: "hello, world!", icon: Data(), link: "http//??", isFavorite: true)
+                self.coreDataManager.write(news: newNews)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
     }
+    
+    @IBAction func read(_ sender: UIButton) {
+        coreDataManager.readNews { orders in
+            guard let orders = orders else { return }
+            orders.forEach { print($0.link) }
+         }
+    }
+    
 }
 

@@ -27,5 +27,9 @@ struct MediaInfo: Decodable {
 }
 
 struct MetaDataInfo: Decodable {
-    let url: String
+    let iconURL: String
+    
+    enum CodingKeys: String, CodingKey {
+        case iconURL = "url"
+    }
 }

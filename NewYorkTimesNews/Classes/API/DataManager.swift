@@ -9,8 +9,8 @@
 import Foundation
 import Alamofire
 
-protocol NewsInteractionProtocol {
-    func getNews(newsType: Router, callBack: @escaping (NewsDataWrapper?) -> Void)
+protocol NewsDataManagerProtocol {
+    func fetchNews(newsType: Router, callBack: @escaping (Result<NewsDataWrapper, Error>) -> Void)
 }
 
 class DataManager {
@@ -22,17 +22,18 @@ class DataManager {
 
 // MARK: - NewsInteracionProtocol
 
-extension DataManager: NewsInteractionProtocol {
+extension DataManager: NewsDataManagerProtocol {
     
-    func getNews(newsType: Router, callBack: @escaping (NewsDataWrapper?) -> Void) {
+    func fetchNews(newsType: Router, callBack: @escaping (Result<NewsDataWrapper, Error>) -> Void) {
         AF.request(newsType).response { response in
-            guard let responseData = response.data else { return }
-            do {
-                let jsonResult = try JSONDecoder().decode(NewsDataWrapper.self, from: responseData)
-                callBack(jsonResult)
-            } catch {
-                print(error)
+            guard let responseData = response.data else {
+                callBack(.failure(NSError()))
+                return
             }
+            let result = Result {
+                try JSONDecoder().decode(NewsDataWrapper.self, from: responseData)
+            }
+            callBack(result)
         }
     }
 }
