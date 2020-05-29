@@ -9,25 +9,33 @@
 import Foundation
 import Alamofire
 
-protocol NewsDataManagerProtocol {
-    func fetchNews(newsType: Router, callBack: @escaping (Result<NewsDataWrapper, Error>) -> Void)
+protocol WebNewsDataManagerProtocol {
+    func fetchWebNews(newsType: Router, callBack: @escaping (Result<NewsDataWrapper, Error>) -> Void)
+}
+
+protocol CoreDataNewsManagerProtocol {
+    func saveNewsToDB(news: NewsCoreDataModel)
+    func readNewsFromDB(callBack: @escaping([NewsCoreDataModel]?) -> Void)
 }
 
 class DataManager {
     
     static let shared = DataManager()
+    private let coreDataManager = CoreDataManager()
     
     private init() { }
 }
 
 // MARK: - NewsInteracionProtocol
 
-extension DataManager: NewsDataManagerProtocol {
+extension DataManager: WebNewsDataManagerProtocol {
     
-    func fetchNews(newsType: Router, callBack: @escaping (Result<NewsDataWrapper, Error>) -> Void) {
+    func fetchWebNews(newsType: Router, callBack: @escaping (Result<NewsDataWrapper, Error>) -> Void) {
         AF.request(newsType).response { response in
             guard let responseData = response.data else {
-                callBack(.failure(NSError()))
+                if let error = response.error {
+                    callBack(.failure(error))
+                }
                 return
             }
             let result = Result {
@@ -37,3 +45,23 @@ extension DataManager: NewsDataManagerProtocol {
         }
     }
 }
+
+// MARK: - CoreDataManagerProtocol
+
+extension DataManager: CoreDataNewsManagerProtocol {
+    
+    func saveNewsToDB(news: NewsCoreDataModel) {
+        coreDataManager.write(news: news)
+    }
+    
+    func readNewsFromDB(callBack: @escaping([NewsCoreDataModel]?) -> Void) {
+        coreDataManager.readNews { result in
+            guard let news = result else {
+                callBack(nil)
+                return
+            }
+            callBack(news)
+        }
+    }
+}
+

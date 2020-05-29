@@ -1,43 +1,174 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EVd-IJ-VPN">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Tab Bar Controller-->
+        <scene sceneID="URh-Cs-MCZ">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="NewYorkTimesNews" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iYV-dv-1mB">
-                                <rect key="frame" x="257.5" y="270" width="85" height="60"/>
-                                <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="Zuj-37-qLs"/>
-                                    <constraint firstAttribute="width" constant="85" id="w8q-MQ-LeA"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="read:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eXB-zo-Zii"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="iYV-dv-1mB" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="2Ua-IZ-Zoy"/>
-                            <constraint firstItem="iYV-dv-1mB" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="uRV-Oe-A8W"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="EVd-IJ-VPN" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0yL-pB-bLb">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="fjV-9i-cqd" kind="relationship" relationship="viewControllers" id="42i-uU-Qet"/>
+                        <segue destination="s9v-7l-lDZ" kind="relationship" relationship="viewControllers" id="4dn-gA-hAp"/>
+                        <segue destination="bTL-lN-Gff" kind="relationship" relationship="viewControllers" id="zPK-V7-XHS"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="60s-F3-nUY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="131.8840579710145" y="138.61607142857142"/>
+            <point key="canvasLocation" x="-322" y="248"/>
+        </scene>
+        <!--Most Emailed News-->
+        <scene sceneID="nle-ZK-JOW">
+            <objects>
+                <tableViewController id="imB-j8-IbY" customClass="MostEmailedNewsTableViewController" customModule="NewYorkTimesNews" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="yyp-XP-vTP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MostEmailedNewsCell" id="1Wa-RV-PB0" customClass="MostEmailedNewsTableViewCell" customModule="NewYorkTimesNews" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1Wa-RV-PB0" id="9HI-AN-2Hw">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="imB-j8-IbY" id="GeP-3Q-9HQ"/>
+                            <outlet property="delegate" destination="imB-j8-IbY" id="htX-6M-KOz"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Most Emailed News" id="ySo-yY-cXm"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ct2-9s-hVH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1429" y="-456"/>
+        </scene>
+        <!--Most Shared News-->
+        <scene sceneID="uRm-Rj-BaL">
+            <objects>
+                <tableViewController id="wWj-P5-alC" customClass="MostSharedNewsTableViewController" customModule="NewYorkTimesNews" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ebR-ZL-5b4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MostSharedNewsCell" id="0ML-YT-FZM" customClass="MostSharedNewsTableViewCell" customModule="NewYorkTimesNews" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0ML-YT-FZM" id="IA2-3P-bXX">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="wWj-P5-alC" id="azT-a1-Djd"/>
+                            <outlet property="delegate" destination="wWj-P5-alC" id="1bb-hb-poq"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Most Shared News" id="oLq-KS-kUc"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BRz-2w-7CE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1429" y="248"/>
+        </scene>
+        <!--Most Viewed News-->
+        <scene sceneID="qJb-nb-wYD">
+            <objects>
+                <tableViewController id="PjT-db-rTR" customClass="MostViewedNewsTableViewController" customModule="NewYorkTimesNews" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2cr-hy-c8W">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MostViewedNewsCell" id="oN7-rP-tl0" customClass="MostViewedNewsTableViewCell" customModule="NewYorkTimesNews" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oN7-rP-tl0" id="lDX-vy-k21">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="PjT-db-rTR" id="V0F-po-xUE"/>
+                            <outlet property="delegate" destination="PjT-db-rTR" id="aou-T8-XKS"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Most Viewed News" id="cpL-mu-yFe"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a3O-x4-DCI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1429" y="960"/>
+        </scene>
+        <!--Most Emailed-->
+        <scene sceneID="E3L-uV-hZg">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fjV-9i-cqd" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Most Emailed" id="OPA-IQ-fpG"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5yh-i7-YCO">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="imB-j8-IbY" kind="relationship" relationship="rootViewController" id="Tzx-aD-w3G"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uYS-W6-hDk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="709" y="-457"/>
+        </scene>
+        <!--Most Shared-->
+        <scene sceneID="4Nx-Qg-Wxu">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="s9v-7l-lDZ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Most Shared" id="XWI-Ni-KJs"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ns7-Z4-rZD">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="wWj-P5-alC" kind="relationship" relationship="rootViewController" id="7Jw-c4-hZx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T69-mp-OhZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="709" y="248"/>
+        </scene>
+        <!--Most Viewed-->
+        <scene sceneID="Vcj-0F-beS">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bTL-lN-Gff" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Most Viewed" id="5s0-q6-o70"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="piy-6M-8VE">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="PjT-db-rTR" kind="relationship" relationship="rootViewController" id="F80-4B-Itg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rhB-Mh-Sb8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="709" y="960"/>
         </scene>
     </scenes>
 </document>

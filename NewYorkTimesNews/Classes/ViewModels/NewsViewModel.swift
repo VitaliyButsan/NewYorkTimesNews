@@ -8,26 +8,26 @@
 
 import Foundation
 
-protocol NewsInteractionProtocol {
-    func getNews(callBack: @escaping(Result<Bool, Error>) -> Void)
+protocol NewsWebInteractionProtocol {
+    func getNewsFromWeb(newsType: Router, callBack: @escaping(Result<Bool, Error>) -> Void)
 }
 
-class NewsViewModel {
+class WebNewsViewModel {
     
-    let newsDataManager: NewsDataManagerProtocol
+    let newsDataManager: WebNewsDataManagerProtocol
     var news: [NewsInfo] = []
     
-    init(dataManager: NewsDataManagerProtocol = DataManager.shared) {
+    init(dataManager: WebNewsDataManagerProtocol = DataManager.shared) {
         self.newsDataManager = dataManager
     }
 }
 
 // MARK: - NewsInteractionProtocol
 
-extension NewsViewModel: NewsInteractionProtocol {
+extension WebNewsViewModel: NewsWebInteractionProtocol {
     
-    func getNews(callBack: @escaping(Result<Bool, Error>) -> Void) {
-        newsDataManager.fetchNews(newsType: .getMostEmailedNews) { result in
+    func getNewsFromWeb(newsType: Router, callBack: @escaping(Result<Bool, Error>) -> Void) {
+        newsDataManager.fetchWebNews(newsType: newsType) { result in
             switch result {
             case .success(let dataWrapper):
                 self.news = dataWrapper.results
