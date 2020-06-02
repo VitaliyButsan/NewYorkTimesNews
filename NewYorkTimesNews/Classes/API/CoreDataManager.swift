@@ -22,7 +22,12 @@ class CoreDataManager {
             do {
                 let result = try context.fetch(fetchRequest) as! [News]
                 for obj in result {
-                    let newNews = NewsCoreDataModel(title: obj.title, icon: obj.icon, link: obj.link, isFavorite: obj.isFavorite)
+                    let newNews = NewsCoreDataModel(title: obj.title,
+                                                    iconData: obj.iconData,
+                                                    iconLink: obj.iconURL,
+                                                    newsLink: obj.newsLink,
+                                                    publishedDate: obj.publishedDate,
+                                                    isFavorite: obj.isFavorite)
                     news.append(newNews)
                 }
                 callback(news)
@@ -34,14 +39,34 @@ class CoreDataManager {
     }
     
     // write
-    func write(news: NewsCoreDataModel) {
+    func writeNews(news: NewsCoreDataModel) {
         delegate.persistentContainer.performBackgroundTask { context in
             guard let newsEntity = NSEntityDescription.entity(forEntityName: "News", in: context) else { return }
             let newsManagedObject = NSManagedObject(entity: newsEntity, insertInto: context) as! News
             newsManagedObject.title = news.title
-            newsManagedObject.icon = news.icon
+            newsManagedObject.iconURL = news.iconLink
+            newsManagedObject.iconData = news.iconData
+            newsManagedObject.newsLink = news.newsLink
             newsManagedObject.isFavorite = news.isFavorite
-            newsManagedObject.link = news.link
+            newsManagedObject.publishedDate = news.publishedDate
+            self.save(context: context)
+        }
+    }
+    
+    // delete news by title
+    func delNewsByTitle(title: String) {
+        delegate.persistentContainer.performBackgroundTask { context in
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "News")
+            request.predicate = NSPredicate(format: "title = %@", title)
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: request)
+            
+            do {
+                try context.execute(batchDeleteRequest)
+                print("\(title) entity was deleted")
+            } catch {
+                print(error)
+            }
+            
             self.save(context: context)
         }
     }

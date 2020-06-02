@@ -9,13 +9,19 @@
 import Foundation
 
 struct NewsDataWrapper: Decodable {
-    let results: [NewsInfo]
+    let results: [WebNewsInfo]
 }
 
-struct NewsInfo: Decodable {
+struct WebNewsInfo: Decodable {
     let url: String
     let title: String
+    let publishedDate: String
     let media: [MediaInfo]
+    
+    enum CodingKeys: String, CodingKey {
+        case url, title, media
+        case publishedDate = "published_date"
+    }
 }
 
 struct MediaInfo: Decodable {

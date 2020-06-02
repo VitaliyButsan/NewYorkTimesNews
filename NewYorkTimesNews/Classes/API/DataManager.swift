@@ -51,7 +51,7 @@ extension DataManager: WebNewsDataManagerProtocol {
 extension DataManager: CoreDataNewsManagerProtocol {
     
     func saveNewsToDB(news: NewsCoreDataModel) {
-        coreDataManager.write(news: news)
+        coreDataManager.writeNews(news: news)
     }
     
     func readNewsFromDB(callBack: @escaping([NewsCoreDataModel]?) -> Void) {

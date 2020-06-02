@@ -11,10 +11,13 @@ import UIKit
 class MostEmailedNewsTableViewController: UITableViewController {
     
     private let newsViewModel = WebNewsViewModel()
-
+    private let coreNewsViewModel = CoreDataNewsViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 250
         getNews()
     }
     
@@ -28,7 +31,6 @@ class MostEmailedNewsTableViewController: UITableViewController {
             case .failure(let error):
                 print(error)
             }
-            
         }
     }
 
@@ -38,9 +40,36 @@ class MostEmailedNewsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MostEmailedNewsTableViewCell.cellID, for: indexPath) as! MostEmailedNewsTableViewCell
+        cell.delegate = self
         let news = newsViewModel.news[indexPath.row]
         cell.updateCell(news: news)
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        coreNewsViewModel.getFavNewsFromDB { result in
+            switch result {
+            case .success(_):
+                if self.coreNewsViewModel.news.count == 0 {
+                    print("db is Empty!")
+                }
+                self.coreNewsViewModel.news.forEach { print($0) }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+}
 
+// MARK: - IsFavoriteTappable protocole
+
+extension MostEmailedNewsTableViewController: IsFavoriteTappable {
+    
+    func makeFavorite(cell: UITableViewCell) {
+        if let mostEmailedCell = cell as? MostEmailedNewsTableViewCell {
+            if let indexPath = tableView.indexPath(for: mostEmailedCell) {
+                newsViewModel.news[indexPath.row].makeFavorite(mostEmailedCell.isFavoriteButton.isSelected)
+            }
+        }
+    }
 }
