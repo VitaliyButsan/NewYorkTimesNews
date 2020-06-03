@@ -11,7 +11,7 @@ import UIKit
 class MostEmailedNewsTableViewController: UITableViewController {
     
     private let newsViewModel = WebNewsViewModel()
-    private let coreNewsViewModel = CoreDataNewsViewModel()
+    private let coreDataNewsViewModel = CoreDataNewsViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,12 @@ class MostEmailedNewsTableViewController: UITableViewController {
             }
         }
     }
+}
 
+// MARK: - Table view data source
+
+extension MostEmailedNewsTableViewController {
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return newsViewModel.news.count
     }
@@ -45,15 +50,20 @@ class MostEmailedNewsTableViewController: UITableViewController {
         cell.updateCell(news: news)
         return cell
     }
+}
+
+// MARK - Table view delegate
+
+extension MostEmailedNewsTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        coreNewsViewModel.getFavNewsFromDB { result in
+        coreDataNewsViewModel.getFavNewsFromDB { result in
             switch result {
             case .success(_):
-                if self.coreNewsViewModel.news.count == 0 {
+                if self.coreDataNewsViewModel.news.count == 0 {
                     print("db is Empty!")
                 }
-                self.coreNewsViewModel.news.forEach { print($0) }
+                self.coreDataNewsViewModel.news.forEach { print($0) }
             case .failure(let error):
                 print(error)
             }

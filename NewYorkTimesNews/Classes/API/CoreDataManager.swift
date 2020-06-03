@@ -21,13 +21,13 @@ class CoreDataManager {
             
             do {
                 let result = try context.fetch(fetchRequest) as! [News]
-                for obj in result {
-                    let newNews = NewsCoreDataModel(title: obj.title,
-                                                    iconData: obj.iconData,
-                                                    iconLink: obj.iconURL,
-                                                    newsLink: obj.newsLink,
-                                                    publishedDate: obj.publishedDate,
-                                                    isFavorite: obj.isFavorite)
+                for newsEntity in result {
+                    let newNews = NewsCoreDataModel(title: newsEntity.title,
+                                                    iconData: newsEntity.iconData,
+                                                    iconLink: newsEntity.iconURL,
+                                                    newsLink: newsEntity.newsLink,
+                                                    publishedDate: newsEntity.publishedDate,
+                                                    isFavorite: newsEntity.isFavorite)
                     news.append(newNews)
                 }
                 callback(news)
@@ -40,20 +40,22 @@ class CoreDataManager {
     
     // write
     func writeNews(news: NewsCoreDataModel) {
-        delegate.persistentContainer.performBackgroundTask { context in
-            guard let newsEntity = NSEntityDescription.entity(forEntityName: "News", in: context) else { return }
-            let newsManagedObject = NSManagedObject(entity: newsEntity, insertInto: context) as! News
-            newsManagedObject.title = news.title
-            newsManagedObject.iconURL = news.iconLink
-            newsManagedObject.iconData = news.iconData
-            newsManagedObject.newsLink = news.newsLink
-            newsManagedObject.isFavorite = news.isFavorite
-            newsManagedObject.publishedDate = news.publishedDate
-            self.save(context: context)
+        if !isExist(news) {
+            self.delegate.persistentContainer.performBackgroundTask { context in
+                    guard let newsEntity = NSEntityDescription.entity(forEntityName: "News", in: context) else { return }
+                    let newsManagedObject = NSManagedObject(entity: newsEntity, insertInto: context) as! News
+                    newsManagedObject.title = news.title
+                    newsManagedObject.iconURL = news.iconLink
+                    newsManagedObject.iconData = news.iconData
+                    newsManagedObject.newsLink = news.newsLink
+                    newsManagedObject.isFavorite = news.isFavorite
+                    newsManagedObject.publishedDate = news.publishedDate
+                    self.save(context: context)
+            }
         }
     }
     
-    // delete news by title
+    // delete
     func delNewsByTitle(title: String) {
         delegate.persistentContainer.performBackgroundTask { context in
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: "News")
@@ -62,7 +64,6 @@ class CoreDataManager {
             
             do {
                 try context.execute(batchDeleteRequest)
-                print("\(title) entity was deleted")
             } catch {
                 print(error)
             }
@@ -71,12 +72,27 @@ class CoreDataManager {
         }
     }
     
+    // is exist
+    private func isExist(_ news: NewsCoreDataModel) -> Bool {
+        let context = delegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "News")
+        request.predicate = NSPredicate(format: "title = %@", news.title)
+        
+        do {
+            let result = try context.fetch(request) as! [News]
+            return result.contains { $0.title == news.title }
+        } catch {
+            print(error.localizedDescription)
+        }
+        return false
+    }
+    
     // save context
     private func save(context: NSManagedObjectContext) {
         do {
             try context.save()
         } catch {
-            print("Could not save context. \(error)")
+            print("ERROR: Could not save context. \(error)")
         }
     }
 }

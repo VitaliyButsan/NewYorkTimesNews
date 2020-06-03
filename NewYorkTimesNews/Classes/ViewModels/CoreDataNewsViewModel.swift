@@ -10,6 +10,7 @@ import Foundation
 
 protocol NewsCoreDataInteractionProtocol {
     func seveFavNewsToDB(news: NewsCoreDataModel)
+    func delNewsByTitle(newsTitle: String)
     func getFavNewsFromDB(callBack: @escaping(Result<Bool, Error>) -> Void)
 }
 
@@ -29,6 +30,10 @@ extension CoreDataNewsViewModel: NewsCoreDataInteractionProtocol {
     
     func seveFavNewsToDB(news: NewsCoreDataModel) {
         newsDataManager.saveNewsToDB(news: news)
+    }
+    
+    func delNewsByTitle(newsTitle: String) {
+        newsDataManager.delNewsFromDbByTitle(newsTitle: newsTitle)
     }
     
     func getFavNewsFromDB(callBack: @escaping (Result<Bool, Error>) -> Void) {

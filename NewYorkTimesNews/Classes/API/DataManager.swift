@@ -15,6 +15,7 @@ protocol WebNewsDataManagerProtocol {
 
 protocol CoreDataNewsManagerProtocol {
     func saveNewsToDB(news: NewsCoreDataModel)
+    func delNewsFromDbByTitle(newsTitle: String)
     func readNewsFromDB(callBack: @escaping([NewsCoreDataModel]?) -> Void)
 }
 
@@ -52,6 +53,10 @@ extension DataManager: CoreDataNewsManagerProtocol {
     
     func saveNewsToDB(news: NewsCoreDataModel) {
         coreDataManager.writeNews(news: news)
+    }
+    
+    func delNewsFromDbByTitle(newsTitle: String) {
+        coreDataManager.delNewsByTitle(title: newsTitle)
     }
     
     func readNewsFromDB(callBack: @escaping([NewsCoreDataModel]?) -> Void) {

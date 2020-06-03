@@ -28,8 +28,4 @@ struct NewsCoreDataModel {
     mutating func makeFavorite(_ isFavorite: Bool) {
         self.isFavorite = isFavorite
     }
-    
-    mutating func setIconData(data: Data) {
-        self.iconData = data
-    }
 }

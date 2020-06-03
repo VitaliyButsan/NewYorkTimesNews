@@ -16,25 +16,24 @@ protocol IsFavoriteTappable {
 class MostEmailedNewsTableViewCell: UITableViewCell {
     
     static let cellID = "MostEmailedNewsCell"
-    var delegate: IsFavoriteTappable?
     
     @IBOutlet weak var titleNewsLabel: UILabel!
     @IBOutlet weak var iconNewsImageView: UIImageView!
     @IBOutlet weak var publishedDateLabel: UILabel!
     @IBOutlet weak var isFavoriteButton: UIButton!
     
-    private let coreDataManager = CoreDataManager()
-    private var currentNews = NewsCoreDataModel.placeholder
-
+    private let coreDataNewsModel = CoreDataNewsViewModel()
+    private var iconLink: String?
+    private var newsLink = ""
+    var delegate: IsFavoriteTappable?
+    
     func updateCell(news: NewsCoreDataModel) {
+        iconLink = news.iconLink
+        newsLink = news.newsLink
         titleNewsLabel.text = news.title
         isFavoriteButton.isSelected = news.isFavorite
-        iconNewsImageView.sd_setImage(with: URL(string: news.iconLink ?? ""), placeholderImage: UIImage(named: "news_icon_placeholder"))
         publishedDateLabel.text = news.publishedDate
-        
-        currentNews = news
-        guard let iconData = iconNewsImageView.image?.pngData() else { return }
-        currentNews.iconData = iconData
+        iconNewsImageView.sd_setImage(with: URL(string: news.iconLink ?? ""), placeholderImage: UIImage(named: "news_icon_placeholder"))
     }
     
     
@@ -42,12 +41,28 @@ class MostEmailedNewsTableViewCell: UITableViewCell {
         
         if isFavoriteButton.isSelected {
             isFavoriteButton.isSelected = false
-            coreDataManager.delNewsByTitle(title: titleNewsLabel.text!)
+            coreDataNewsModel.delNewsByTitle(newsTitle: titleNewsLabel.text!)
         } else {
             isFavoriteButton.isSelected = true
-            coreDataManager.writeNews(news: currentNews)
+            let currentNews = getCurrentNews()
+            coreDataNewsModel.seveFavNewsToDB(news: currentNews)
         }
         
         delegate?.makeFavorite(cell: self)
+    }
+    
+    private func getCurrentNews() -> NewsCoreDataModel {
+        guard let title = titleNewsLabel.text  else { return NewsCoreDataModel.placeholder }
+        guard let iconData = iconNewsImageView.image?.pngData() else { return NewsCoreDataModel.placeholder }
+        guard let iconLink = iconLink else { return NewsCoreDataModel.placeholder }
+        guard let publishedData = publishedDateLabel.text else { return NewsCoreDataModel.placeholder }
+        
+        let currentNews = NewsCoreDataModel(title: title,
+                                            iconData: iconData,
+                                            iconLink: iconLink,
+                                            newsLink: newsLink,
+                                            publishedDate: publishedData,
+                                            isFavorite: isFavoriteButton.isSelected)
+        return currentNews
     }
 }
