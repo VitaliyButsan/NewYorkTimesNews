@@ -108,8 +108,8 @@
 				581BA583247D5A11009C5E4F /* AppDelegate.swift */,
 				581BA58F247D5A1A009C5E4F /* Assets.xcassets */,
 				581BA585247D5A11009C5E4F /* SceneDelegate.swift */,
-				585DD27C247D66C5000EE480 /* Supporting Files */,
 				585DD277247D6675000EE480 /* Classes */,
+				585DD27C247D66C5000EE480 /* Supporting Files */,
 			);
 			path = NewYorkTimesNews;
 			sourceTree = "<group>";
@@ -129,9 +129,9 @@
 			isa = PBXGroup;
 			children = (
 				585DD278247D667C000EE480 /* Models */,
-				585DD27B247D669E000EE480 /* Controllers */,
 				585DD27A247D6699000EE480 /* Views */,
 				585DD28A247D98EA000EE480 /* ViewModels */,
+				585DD27B247D669E000EE480 /* Controllers */,
 				585DD27D247D670F000EE480 /* API */,
 				585DD27E247D6712000EE480 /* Extensions */,
 				585DD27F247D6718000EE480 /* Helpers */,

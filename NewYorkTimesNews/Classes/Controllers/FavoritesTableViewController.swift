@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class FavoritesTableViewController: UITableViewController {
     
@@ -30,7 +31,6 @@ class FavoritesTableViewController: UITableViewController {
         }
     }
 
-    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
@@ -46,5 +46,30 @@ class FavoritesTableViewController: UITableViewController {
         cell.updateCell(news: favNews)
         
         return cell
+    }
+}
+
+// MARK - Table view delegate
+
+extension FavoritesTableViewController {
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let newsLink = newsViewModel.news[indexPath.row].newsLink
+        showLinkWithSafari(link: newsLink)
+    }
+    
+    private func showLinkWithSafari(link: String) {
+        let safariVC = SFSafariViewController(url: URL(string: link)!)
+        self.present(safariVC, animated: true, completion: nil)
+        safariVC.delegate = self
+    }
+}
+
+// MARK: - SFSafariViewControllerDelegate
+
+extension FavoritesTableViewController: SFSafariViewControllerDelegate {
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }

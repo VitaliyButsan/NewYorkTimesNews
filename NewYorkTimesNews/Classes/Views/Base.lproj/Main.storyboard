@@ -127,12 +127,20 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Most Emailed News" id="ySo-yY-cXm">
-                        <barButtonItem key="rightBarButtonItem" image="star_icon" id="Dog-MU-CPl">
-                            <connections>
-                                <segue destination="oN2-0H-otk" kind="show" identifier="favoritesSegue" id="Ogy-1I-Suu"/>
-                            </connections>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="Bb8-BU-8zH">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NyS-rw-2Ds">
+                                <rect key="frame" x="364" y="7" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="email_icon"/>
+                                <connections>
+                                    <segue destination="oN2-0H-otk" kind="show" id="Iee-Jx-eaA"/>
+                                </connections>
+                            </button>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="favoritesButton" destination="NyS-rw-2Ds" id="aZW-OA-fU0"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ct2-9s-hVH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -486,7 +494,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Ogy-1I-Suu"/>
+        <segue reference="Iee-Jx-eaA"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="email_icon" width="30" height="30"/>

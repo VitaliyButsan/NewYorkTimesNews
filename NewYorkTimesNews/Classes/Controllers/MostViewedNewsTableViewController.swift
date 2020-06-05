@@ -7,12 +7,12 @@
 //
 
 import UIKit
+import SafariServices
 
 class MostViewedNewsTableViewController: UITableViewController {
     
     private let newsViewModel = WebNewsViewModel()
-    private let coreDataNewsViewModel = CoreDataNewsViewModel()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,17 +57,23 @@ extension MostViewedNewsTableViewController {
 extension MostViewedNewsTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        coreDataNewsViewModel.getFavNewsFromDB { result in
-            switch result {
-            case .success(_):
-                if self.coreDataNewsViewModel.news.count == 0 {
-                    print("db is Empty!")
-                }
-                self.coreDataNewsViewModel.news.forEach { print($0) }
-            case .failure(let error):
-                print(error)
-            }
-        }
+        let newsLink = newsViewModel.news[indexPath.row].newsLink
+        showLinkWithSafari(link: newsLink)
+    }
+    
+    private func showLinkWithSafari(link: String) {
+        let safariVC = SFSafariViewController(url: URL(string: link)!)
+        self.present(safariVC, animated: true, completion: nil)
+        safariVC.delegate = self
+    }
+}
+
+// MARK: - SFSafariViewControllerDelegate
+
+extension MostViewedNewsTableViewController: SFSafariViewControllerDelegate {
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }
 
