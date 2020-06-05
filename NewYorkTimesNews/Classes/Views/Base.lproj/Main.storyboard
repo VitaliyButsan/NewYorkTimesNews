@@ -63,11 +63,11 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="IEI-cz-5iF"/>
                                                     </constraints>
-                                                    <state key="normal" title="Button" image="unselected_icon"/>
+                                                    <state key="normal" image="unselected_icon"/>
                                                     <state key="disabled" image="unselected_icon"/>
                                                     <state key="selected" image="selected_icon"/>
                                                     <connections>
-                                                        <action selector="makeFavoriteButton:" destination="1Wa-RV-PB0" eventType="touchUpInside" id="ttw-hR-1a5"/>
+                                                        <action selector="makeFavoriteButton:" destination="1Wa-RV-PB0" eventType="touchUpInside" id="P3e-74-G6w"/>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9uo-4l-0bd">
@@ -114,10 +114,10 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <outlet property="iconNewsImageView" destination="Llw-eo-yll" id="LR9-L3-gog"/>
-                                    <outlet property="isFavoriteButton" destination="XXA-pS-pyM" id="lBn-GF-LyL"/>
-                                    <outlet property="publishedDateLabel" destination="9uo-4l-0bd" id="d82-2F-jVl"/>
-                                    <outlet property="titleNewsLabel" destination="8zq-3W-1Wg" id="fn9-W3-v4J"/>
+                                    <outlet property="iconNewsImageView" destination="Llw-eo-yll" id="PWk-FI-VUa"/>
+                                    <outlet property="isFavoriteButton" destination="XXA-pS-pyM" id="0iu-EJ-rCP"/>
+                                    <outlet property="publishedDateLabel" destination="9uo-4l-0bd" id="3hw-k5-zle"/>
+                                    <outlet property="titleNewsLabel" destination="8zq-3W-1Wg" id="e71-g1-W2W"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -127,19 +127,21 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Most Emailed News" id="ySo-yY-cXm">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="Bb8-BU-8zH">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NyS-rw-2Ds">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="Kjh-me-jfs">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hfd-9a-Gx1">
                                 <rect key="frame" x="364" y="7" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="email_icon"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="heart30x30"/>
                                 <connections>
-                                    <segue destination="oN2-0H-otk" kind="show" id="Iee-Jx-eaA"/>
+                                    <action selector="favoritesButton:" destination="imB-j8-IbY" eventType="touchUpInside" id="nsx-RU-nVr"/>
                                 </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="favoritesButton" destination="NyS-rw-2Ds" id="aZW-OA-fU0"/>
+                        <outlet property="favoritesButton" destination="hfd-9a-Gx1" id="pez-0O-Ayk"/>
+                        <segue destination="oN2-0H-otk" kind="show" identifier="segueToFavorites" id="DFv-ah-LiQ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ct2-9s-hVH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -183,7 +185,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="yWX-2c-hdT"/>
                                                     </constraints>
-                                                    <state key="normal" title="Button" image="unselected_icon"/>
+                                                    <state key="normal" image="unselected_icon"/>
                                                     <state key="disabled" image="unselected_icon"/>
                                                     <state key="selected" image="selected_icon"/>
                                                     <connections>
@@ -247,12 +249,22 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Most Shared News" id="oLq-KS-kUc">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="star_icon" id="Mce-DK-HLz">
-                            <connections>
-                                <segue destination="oN2-0H-otk" kind="show" id="SfA-bp-y7H"/>
-                            </connections>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="ZpT-KV-003">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Jp5-nL-T2w">
+                                <rect key="frame" x="364" y="7" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="heart30x30"/>
+                                <connections>
+                                    <action selector="favoritesButton:" destination="wWj-P5-alC" eventType="touchUpInside" id="ZSI-Oq-mYz"/>
+                                </connections>
+                            </button>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="favoritesButton" destination="Jp5-nL-T2w" id="klz-72-MVi"/>
+                        <segue destination="oN2-0H-otk" kind="show" identifier="segueToFavorites" id="XIS-p7-DOh"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BRz-2w-7CE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -357,7 +369,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="f2z-0N-YoS"/>
                                                     </constraints>
-                                                    <state key="normal" title="Button" image="unselected_icon"/>
+                                                    <state key="normal" image="unselected_icon"/>
                                                     <state key="disabled" image="unselected_icon"/>
                                                     <state key="selected" image="selected_icon"/>
                                                     <connections>
@@ -421,12 +433,22 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Most Viewed News" id="cpL-mu-yFe">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="star_icon" id="EVr-eh-Bxm">
-                            <connections>
-                                <segue destination="oN2-0H-otk" kind="show" id="dk0-mg-DSI"/>
-                            </connections>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="cfo-c8-y3b">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pve-Rw-Lzd">
+                                <rect key="frame" x="364" y="7" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="heart30x30"/>
+                                <connections>
+                                    <action selector="favoritesButton:" destination="PjT-db-rTR" eventType="touchUpInside" id="sZk-vq-iYq"/>
+                                </connections>
+                            </button>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="favoritesButton" destination="pve-Rw-Lzd" id="h5F-Wz-qaj"/>
+                        <segue destination="oN2-0H-otk" kind="show" identifier="segueToFavorites" id="B8h-iB-dfW"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a3O-x4-DCI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -494,14 +516,14 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Iee-Jx-eaA"/>
+        <segue reference="B8h-iB-dfW"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="email_icon" width="30" height="30"/>
         <image name="eye_icon" width="30" height="30"/>
-        <image name="selected_icon" width="512" height="512"/>
+        <image name="heart30x30" width="30" height="30"/>
+        <image name="selected_icon" width="20" height="20"/>
         <image name="sharing_icon" width="20" height="23"/>
-        <image name="star_icon" width="25" height="25"/>
-        <image name="unselected_icon" width="512" height="512"/>
+        <image name="unselected_icon" width="20" height="20"/>
     </resources>
 </document>

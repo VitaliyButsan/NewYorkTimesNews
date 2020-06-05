@@ -9,11 +9,15 @@
 import UIKit
 import SafariServices
 
-class MostEmailedNewsTableViewController: UITableViewController {
+protocol ViewModelChangeable {
+    var newsViewModel: WebNewsViewModel { get set }
+}
+
+class MostEmailedNewsTableViewController: UITableViewController, ViewModelChangeable {
     
-    private let newsViewModel = WebNewsViewModel()
+    var newsViewModel = WebNewsViewModel()
     private let coreDataNewsViewModel = CoreDataNewsViewModel()
-    private let badgeTag = 777
+    let badgeTag = 777
     
     @IBOutlet weak var favoritesButton: UIButton!
     
@@ -27,11 +31,14 @@ class MostEmailedNewsTableViewController: UITableViewController {
         getWebNews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     private func setupCoreDataSavingObserver() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(receiveFavNews(_:)),
-                                               name: NSNotification.Name.NSManagedObjectContextDidSave,
-                                               object: nil)
+        let name = NSNotification.Name.NSManagedObjectContextDidSave
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveFavNews(_:)), name: name, object: nil)
     }
     
     @objc func receiveFavNews(_ notification: NSNotification) {
@@ -85,13 +92,13 @@ class MostEmailedNewsTableViewController: UITableViewController {
         badgeCount.layer.masksToBounds = true
         badgeCount.textColor = .white
         badgeCount.font = badgeCount.font.withSize(12)
-        badgeCount.backgroundColor = .systemRed
+        badgeCount.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
         badgeCount.text = String(count)
         return badgeCount
     }
     
     private func getWebNews() {
-        newsViewModel.getNewsFromWeb(newsType: Router.getMostEmailedNews) { result in
+        newsViewModel.getNewsFromWeb(newsType: .getMostEmailedNews) { result in
             switch result {
             case .success(_):
                 DispatchQueue.main.async {
@@ -100,6 +107,16 @@ class MostEmailedNewsTableViewController: UITableViewController {
             case .failure(let error):
                 print(error)
             }
+        }
+    }
+    
+    @IBAction func favoritesButton(_ sender: UIButton) {
+        performSegue(withIdentifier: "segueToFavorites", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let favoritesTVC = segue.destination as? FavoritesTableViewController {
+            favoritesTVC.cameFromTVC = self
         }
     }
 }
@@ -114,9 +131,9 @@ extension MostEmailedNewsTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MostEmailedNewsTableViewCell.cellID, for: indexPath) as! MostEmailedNewsTableViewCell
-        cell.delegate = self
         let news = newsViewModel.news[indexPath.row]
         cell.updateCell(news: news)
+        cell.delegate = self
         return cell
     }
 }
