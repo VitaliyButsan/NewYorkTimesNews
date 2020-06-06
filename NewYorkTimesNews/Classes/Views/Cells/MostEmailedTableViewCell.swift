@@ -22,7 +22,6 @@ class MostEmailedNewsTableViewCell: UITableViewCell {
     @IBOutlet weak var publishedDateLabel: UILabel!
     @IBOutlet weak var isFavoriteButton: UIButton!
     
-    
     private let coreDataNewsModel = CoreDataNewsViewModel()
     private var iconLink: String?
     private var newsLink = ""

@@ -49,9 +49,17 @@ class MostEmailedNewsTableViewController: UITableViewController, ViewModelChange
         coreDataNewsViewModel.getFavNewsFromDB { result in
             switch result {
             case .success(_):
-                let newsCount = self.coreDataNewsViewModel.news.count
+                let favNewsCount = self.coreDataNewsViewModel.news.count
                 DispatchQueue.main.async {
-                    newsCount == 0 ? self.removeBadge() : self.showBadge(withCount: newsCount)
+                    if favNewsCount > 0 {
+                        if let badge = self.favoritesButton.viewWithTag(self.badgeTag) as? UILabel {
+                            badge.text = String(favNewsCount)
+                        } else {
+                            self.showBadge(withCount: favNewsCount)
+                        }
+                    } else {
+                        self.removeBadge()
+                    }
                 }
             case .failure(let error):
                 print(error)
@@ -64,13 +72,12 @@ class MostEmailedNewsTableViewController: UITableViewController, ViewModelChange
     }
     
     private func showBadge(withCount count: Int) {
-        self.removeBadge()
         let badgeSize: CGFloat = 20
-        let badge = badgeLabel(withCount: count)
+        let badge = badgeLabel(withCount: count, badgeSize: badgeSize)
         favoritesButton.addSubview(badge)
 
         NSLayoutConstraint.activate([
-            badge.leftAnchor.constraint(equalTo: favoritesButton.leftAnchor, constant: 20),
+            badge.leftAnchor.constraint(equalTo: favoritesButton.leftAnchor, constant: badgeSize),
             badge.topAnchor.constraint(equalTo: favoritesButton.topAnchor, constant: -5),
             badge.widthAnchor.constraint(equalToConstant: badgeSize),
             badge.heightAnchor.constraint(equalToConstant: badgeSize)
@@ -83,7 +90,7 @@ class MostEmailedNewsTableViewController: UITableViewController, ViewModelChange
         }
     }
     
-    private func badgeLabel(withCount count: Int, badgeSize: CGFloat = 20) -> UILabel {
+    private func badgeLabel(withCount count: Int, badgeSize: CGFloat) -> UILabel {
         let badgeCount = UILabel(frame: CGRect(x: 0, y: 0, width: badgeSize, height: badgeSize))
         badgeCount.translatesAutoresizingMaskIntoConstraints = false
         badgeCount.tag = badgeTag
