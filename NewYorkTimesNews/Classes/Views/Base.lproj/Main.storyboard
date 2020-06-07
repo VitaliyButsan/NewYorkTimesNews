@@ -127,7 +127,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Most Emailed News" id="ySo-yY-cXm">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="Kjh-me-jfs">
+                        <barButtonItem key="rightBarButtonItem" id="Kjh-me-jfs">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hfd-9a-Gx1">
                                 <rect key="frame" x="364" y="7" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -249,7 +249,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Most Shared News" id="oLq-KS-kUc">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="ZpT-KV-003">
+                        <barButtonItem key="rightBarButtonItem" id="ZpT-KV-003">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Jp5-nL-T2w">
                                 <rect key="frame" x="364" y="7" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -270,7 +270,7 @@
             </objects>
             <point key="canvasLocation" x="1429" y="248"/>
         </scene>
-        <!--Favorites Table View Controller-->
+        <!--Favorites-->
         <scene sceneID="NdI-Mm-P1U">
             <objects>
                 <tableViewController id="oN2-0H-otk" customClass="FavoritesTableViewController" customModule="NewYorkTimesNews" customModuleProvider="target" sceneMemberID="viewController">
@@ -303,6 +303,9 @@
                                                     <integer key="value" value="10"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                    <integer key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                     </subviews>
@@ -326,7 +329,7 @@
                             <outlet property="delegate" destination="oN2-0H-otk" id="bh9-0i-jPz"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="OP0-SP-jFt"/>
+                    <navigationItem key="navigationItem" title="Favorites" id="OP0-SP-jFt"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6o8-9D-Kvv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -433,7 +436,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Most Viewed News" id="cpL-mu-yFe">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="cfo-c8-y3b">
+                        <barButtonItem key="rightBarButtonItem" id="cfo-c8-y3b">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pve-Rw-Lzd">
                                 <rect key="frame" x="364" y="7" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

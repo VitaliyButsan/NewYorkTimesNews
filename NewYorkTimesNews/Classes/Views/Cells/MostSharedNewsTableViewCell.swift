@@ -21,7 +21,7 @@ class MostSharedNewsTableViewCell: UITableViewCell {
     private let coreDataNewsModel = CoreDataNewsViewModel()
     private var iconLink: String?
     private var newsLink = ""
-    var delegate: IsFavoriteTappable?
+    var delegate: IsFavoriteMakeble?
     
     func updateCell(news: NewsCoreDataModel) {
         iconLink = news.iconLink

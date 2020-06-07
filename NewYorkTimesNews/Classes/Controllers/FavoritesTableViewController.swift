@@ -76,8 +76,8 @@ extension FavoritesTableViewController {
         if editingStyle == .delete {
             guard let editingCell = tableView.cellForRow(at: indexPath) as? FavoritesTableViewCell else { return }
             guard let editingCellTitle = editingCell.titleLabel?.text else { return }
-            coreDataNewsViewModel.news.remove(at: indexPath.row)
             coreDataNewsViewModel.delNewsByTitle(newsTitle: editingCellTitle)
+            coreDataNewsViewModel.news.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
             
             if let matchingCellIndexOfCameFromTVC = cameFromTVC?.newsViewModel.news.firstIndex(where: { $0.title == editingCellTitle }) {

@@ -10,20 +10,11 @@ import Foundation
 
 struct NewsCoreDataModel {
     let title: String
-    var iconData: Data
+    let iconData: Data
     let iconLink: String?
     let newsLink: String
     let publishedDate: String
     var isFavorite: Bool
-    
-    static var placeholder: Self {
-        NewsCoreDataModel(title: "",
-                          iconData: Data(),
-                          iconLink: nil,
-                          newsLink: "",
-                          publishedDate: "",
-                          isFavorite: false)
-    }
     
     mutating func makeFavorite(_ isFavorite: Bool) {
         self.isFavorite = isFavorite
@@ -35,5 +26,14 @@ struct NewsCoreDataModel {
             lhs.iconLink == rhs.iconLink &&
             lhs.newsLink == rhs.newsLink &&
             lhs.publishedDate == rhs.publishedDate
+    }
+
+    static var placeholder: Self {
+        NewsCoreDataModel(title: "",
+                          iconData: Data(),
+                          iconLink: nil,
+                          newsLink: "",
+                          publishedDate: "",
+                          isFavorite: false)
     }
 }

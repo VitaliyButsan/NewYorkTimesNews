@@ -13,7 +13,7 @@ protocol ViewModelChangeable {
     var newsViewModel: WebNewsViewModel { get set }
 }
 
-class MostEmailedNewsTableViewController: UITableViewController, ViewModelChangeable {
+class MostEmailedNewsTableViewController: UITableViewController, ViewModelChangeable, Progressable {
     
     var newsViewModel = WebNewsViewModel()
     private let coreDataNewsViewModel = CoreDataNewsViewModel()
@@ -23,9 +23,9 @@ class MostEmailedNewsTableViewController: UITableViewController, ViewModelChange
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 250
+        showLoading(withMessage: "Loading...")
         setupCoreDataSavingObserver()
         getFavNewsForBadge()
         getWebNews()
@@ -59,16 +59,15 @@ class MostEmailedNewsTableViewController: UITableViewController, ViewModelChange
     }
     
     private func setupCellsFavoriteIcons() {
-        for (index, _) in newsViewModel.news.enumerated() {
+        for index in 0..<newsViewModel.news.count {
             newsViewModel.news[index].isFavorite = false
         }
-        
         coreDataNewsViewModel.getFavNewsFromDB { result in
             switch result {
             case .success(_):
                 self.coreDataNewsViewModel.news.forEach { favNews in
                     if let equalsNewsIndex = self.newsViewModel.news.firstIndex(where: {$0 == favNews}) {
-                        self.newsViewModel.news[equalsNewsIndex].isFavorite = true
+                        self.newsViewModel.news[equalsNewsIndex].makeFavorite(true)
                     }
                 }
                 DispatchQueue.main.async {
@@ -138,9 +137,11 @@ class MostEmailedNewsTableViewController: UITableViewController, ViewModelChange
             case .success(_):
                 self.setupCellsFavoriteIcons()
                 DispatchQueue.main.async {
+                    self.hideLoadingWithSuccess(withMessage: "")
                     self.tableView.reloadData()
                 }
             case .failure(let error):
+                self.hideLoadingWithError(withMessage: "Error loading!")
                 print(error)
             }
         }
@@ -201,7 +202,7 @@ extension MostEmailedNewsTableViewController: SFSafariViewControllerDelegate {
 
 // MARK: - IsFavoriteTappable protocole
 
-extension MostEmailedNewsTableViewController: IsFavoriteTappable {
+extension MostEmailedNewsTableViewController: IsFavoriteMakeble {
     
     func makeFavorite(cell: UITableViewCell) {
         if let mostEmailedCell = cell as? MostEmailedNewsTableViewCell {
