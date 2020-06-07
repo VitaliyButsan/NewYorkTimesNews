@@ -26,13 +26,21 @@ class WebNewsViewModel {
         
         for webNewsModel in webNewsModels {
             var iconLink = ""
+            var iconData = Data()
             
-            if let urlString = webNewsModel.media.first?.metaData.last?.iconURL {
+            if let urlString = webNewsModel.media.first?.metaData.last?.iconURL, let url = URL(string: urlString) {
                 iconLink = urlString
+                
+                do {
+                    let data = try Data(contentsOf: url)
+                    iconData = data
+                } catch {
+                    print(error)
+                }
             }
             
             let newCoreDataModel = NewsCoreDataModel(title: webNewsModel.title,
-                                                     iconData: Data(),
+                                                     iconData: iconData,
                                                      iconLink: iconLink,
                                                      newsLink: webNewsModel.url,
                                                      publishedDate: webNewsModel.publishedDate,

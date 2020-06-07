@@ -28,4 +28,12 @@ struct NewsCoreDataModel {
     mutating func makeFavorite(_ isFavorite: Bool) {
         self.isFavorite = isFavorite
     }
+    
+    public static func ==(lhs: NewsCoreDataModel, rhs: NewsCoreDataModel) -> Bool {
+        return
+            lhs.title == rhs.title &&
+            lhs.iconLink == rhs.iconLink &&
+            lhs.newsLink == rhs.newsLink &&
+            lhs.publishedDate == rhs.publishedDate
+    }
 }

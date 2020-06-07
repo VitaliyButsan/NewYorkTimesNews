@@ -65,7 +65,6 @@ extension FavoritesTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: FavoritesTableViewCell.cellID, for: indexPath) as! FavoritesTableViewCell
         let favNews = coreDataNewsViewModel.news[indexPath.row]
         cell.updateCell(news: favNews)
-        
         return cell
     }
     
@@ -81,8 +80,9 @@ extension FavoritesTableViewController {
             coreDataNewsViewModel.delNewsByTitle(newsTitle: editingCellTitle)
             tableView.deleteRows(at: [indexPath], with: .automatic)
             
-            guard let index = cameFromTVC?.newsViewModel.news.firstIndex(where: { $0.title == editingCellTitle }) else { return }
-            cameFromTVC?.newsViewModel.news[index].isFavorite = false
+            if let matchingCellIndexOfCameFromTVC = cameFromTVC?.newsViewModel.news.firstIndex(where: { $0.title == editingCellTitle }) {
+                cameFromTVC?.newsViewModel.news[matchingCellIndexOfCameFromTVC].isFavorite = false
+            }
         }
     }
 }

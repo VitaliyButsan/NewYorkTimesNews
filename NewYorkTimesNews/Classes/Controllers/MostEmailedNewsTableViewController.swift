@@ -33,6 +33,7 @@ class MostEmailedNewsTableViewController: UITableViewController, ViewModelChange
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupCellsFavoriteIcons()
         tableView.reloadData()
     }
     
@@ -49,20 +50,47 @@ class MostEmailedNewsTableViewController: UITableViewController, ViewModelChange
         coreDataNewsViewModel.getFavNewsFromDB { result in
             switch result {
             case .success(_):
-                let favNewsCount = self.coreDataNewsViewModel.news.count
-                DispatchQueue.main.async {
-                    if favNewsCount > 0 {
-                        if let badge = self.favoritesButton.viewWithTag(self.badgeTag) as? UILabel {
-                            badge.text = String(favNewsCount)
-                        } else {
-                            self.showBadge(withCount: favNewsCount)
-                        }
-                    } else {
-                        self.removeBadge()
+                self.setupBarButtonBadge()
+                self.setupCellsFavoriteIcons()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func setupCellsFavoriteIcons() {
+        for (index, _) in newsViewModel.news.enumerated() {
+            newsViewModel.news[index].isFavorite = false
+        }
+        
+        coreDataNewsViewModel.getFavNewsFromDB { result in
+            switch result {
+            case .success(_):
+                self.coreDataNewsViewModel.news.forEach { favNews in
+                    if let equalsNewsIndex = self.newsViewModel.news.firstIndex(where: {$0 == favNews}) {
+                        self.newsViewModel.news[equalsNewsIndex].isFavorite = true
                     }
+                }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
                 }
             case .failure(let error):
                 print(error)
+            }
+        }
+    }
+    
+    private func setupBarButtonBadge() {
+        let favNewsCount = coreDataNewsViewModel.news.count
+        DispatchQueue.main.async {
+            if favNewsCount > 0 {
+                if let badge = self.favoritesButton.viewWithTag(self.badgeTag) as? UILabel {
+                    badge.text = String(favNewsCount)
+                } else {
+                    self.showBadge(withCount: favNewsCount)
+                }
+            } else {
+                self.removeBadge()
             }
         }
     }
@@ -108,6 +136,7 @@ class MostEmailedNewsTableViewController: UITableViewController, ViewModelChange
         newsViewModel.getNewsFromWeb(newsType: .getMostEmailedNews) { result in
             switch result {
             case .success(_):
+                self.setupCellsFavoriteIcons()
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
