@@ -15,26 +15,40 @@ protocol ViewModelChangeable {
 
 class MostEmailedNewsTableViewController: UITableViewController, ViewModelChangeable, Progressable {
     
+    @IBOutlet weak var favoritesButton: UIButton!
+    
     var newsViewModel = WebNewsViewModel()
     private let coreDataNewsViewModel = CoreDataNewsViewModel()
     let badgeTag = 777
     
-    @IBOutlet weak var favoritesButton: UIButton!
+    let newRefreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshNews(_:)), for: .valueChanged)
+        return refreshControl
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 250
+        
+        tableView.refreshControl = newRefreshControl
         showLoading(withMessage: "Loading...")
         setupCoreDataSavingObserver()
         getFavNewsForBadge()
         getWebNews()
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 300
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupCellsFavoriteIcons()
         tableView.reloadData()
+    }
+    
+    @objc func refreshNews(_ sender: UIRefreshControl) {
+        getWebNews()
+        sender.endRefreshing()
     }
     
     private func setupCoreDataSavingObserver() {
@@ -135,13 +149,13 @@ class MostEmailedNewsTableViewController: UITableViewController, ViewModelChange
         newsViewModel.getNewsFromWeb(newsType: .getMostEmailedNews) { result in
             switch result {
             case .success(_):
+                self.hideLoaderWithSuccess(withMessage: "")
                 self.setupCellsFavoriteIcons()
                 DispatchQueue.main.async {
-                    self.hideLoadingWithSuccess(withMessage: "")
                     self.tableView.reloadData()
                 }
             case .failure(let error):
-                self.hideLoadingWithError(withMessage: "Error loading!")
+                self.hideLoaderWithError(withMessage: "Error loading!")
                 print(error)
             }
         }
@@ -183,6 +197,10 @@ extension MostEmailedNewsTableViewController {
         let newsLink = newsViewModel.news[indexPath.row].newsLink
         showLinkWithSafari(link: newsLink)
     }
+    /*
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    } */
     
     private func showLinkWithSafari(link: String) {
         let safariVC = SFSafariViewController(url: URL(string: link)!)

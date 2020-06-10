@@ -17,6 +17,12 @@ class MostSharedNewsTableViewController: UITableViewController, ViewModelChangea
     private let coreDataNewsViewModel = CoreDataNewsViewModel()
     private let badgeTag = 777
     
+    let myRefreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshNews(_:)), for: .valueChanged)
+        return refreshControl
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = UITableView.automaticDimension
@@ -31,6 +37,11 @@ class MostSharedNewsTableViewController: UITableViewController, ViewModelChangea
         super.viewWillAppear(animated)
         setupCellsFavoriteIcons()
         tableView.reloadData()
+    }
+    
+    @objc func refreshNews(_ sender: UIRefreshControl) {
+        getWebNews()
+        sender.endRefreshing()
     }
     
     private func setupCoreDataSavingObserver() {
@@ -130,13 +141,13 @@ class MostSharedNewsTableViewController: UITableViewController, ViewModelChangea
         newsViewModel.getNewsFromWeb(newsType: .getMostSharedNews) { result in
             switch result {
             case .success(_):
-                self.hideLoadingWithSuccess(withMessage: "")
+                self.hideLoaderWithSuccess(withMessage: "")
                 self.setupCellsFavoriteIcons()
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
             case .failure(let error):
-                self.hideLoadingWithError(withMessage: "Error loading!")
+                self.hideLoaderWithError(withMessage: "Error loading!")
                 print(error)
             }
         }

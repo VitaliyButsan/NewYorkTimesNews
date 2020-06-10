@@ -17,8 +17,8 @@ protocol Progressable {
     func showLoading()
     func showLoading(withMessage message: String)
     func hideLoading()
-    func hideLoadingWithSuccess(withMessage message: String?)
-    func hideLoadingWithError(withMessage message: String?)
+    func hideLoaderWithSuccess(withMessage message: String?)
+    func hideLoaderWithError(withMessage message: String?)
 }
 
 extension Progressable where Self: UIViewController {
@@ -39,12 +39,12 @@ extension Progressable where Self: UIViewController {
         }
     }
     
-    func hideLoadingWithSuccess(withMessage message: String?) {
+    func hideLoaderWithSuccess(withMessage message: String?) {
         hideLoading()
         showHUD(withMessage: message, hideAfter: 0)
     }
     
-    func hideLoadingWithError(withMessage message: String?) {
+    func hideLoaderWithError(withMessage message: String?) {
         hideLoading()
         let imageView = UIImageView(image: UIImage(named: "warning_icon"))
         imageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
