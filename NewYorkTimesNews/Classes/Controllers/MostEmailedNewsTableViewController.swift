@@ -36,8 +36,8 @@ class MostEmailedNewsTableViewController: UITableViewController, ViewModelChange
         getFavNewsForBadge()
         getWebNews()
         
-        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 300
+        tableView.rowHeight = UITableView.automaticDimension
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -197,10 +197,6 @@ extension MostEmailedNewsTableViewController {
         let newsLink = newsViewModel.news[indexPath.row].newsLink
         showLinkWithSafari(link: newsLink)
     }
-    /*
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    } */
     
     private func showLinkWithSafari(link: String) {
         let safariVC = SFSafariViewController(url: URL(string: link)!)

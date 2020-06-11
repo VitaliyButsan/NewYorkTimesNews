@@ -22,6 +22,8 @@ class MostEmailedNewsTableViewCell: UITableViewCell {
     @IBOutlet weak var publishedDateLabel: UILabel!
     @IBOutlet weak var isFavoriteButton: UIButton!
     
+    @IBOutlet weak var iconNewsHeightConstraint: NSLayoutConstraint!
+    
     private let coreDataNewsModel = CoreDataNewsViewModel()
     private var iconLink: String?
     private var newsLink = ""
@@ -33,7 +35,16 @@ class MostEmailedNewsTableViewCell: UITableViewCell {
         titleNewsLabel.text = news.title
         isFavoriteButton.isSelected = news.isFavorite
         publishedDateLabel.text = news.publishedDate
-        iconNewsImageView.sd_setImage(with: URL(string: news.iconLink ?? ""), placeholderImage: UIImage(named: "news_icon_placeholder"))
+        iconNewsImageView.sd_setImage(with: URL(string: news.iconLink ?? ""), placeholderImage: UIImage(named: "news_icon_placeholder")) { (_, _, _, _) in
+            /// 8 - 223
+            /// 11 - 249
+            
+            //print(self.iconNewsImageView.image?.size.width)
+            //self.iconNewsHeightConstraint.constant = 249
+            //print(self.superview?.frame.width)
+            //self.layoutSubviews()
+            //self.layoutIfNeeded()
+        }
     }
     
     
