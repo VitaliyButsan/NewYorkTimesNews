@@ -178,7 +178,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="alz-Kf-6e9">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="alz-Kf-6e9">
                                                     <rect key="frame" x="0.0" y="53" width="374" height="225"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="225" id="37U-QC-k0d"/>
@@ -365,7 +365,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ff6-Oa-GoU">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ff6-Oa-GoU">
                                                     <rect key="frame" x="0.0" y="53" width="374" height="225"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="225" id="U7s-iF-SzI"/>
@@ -523,7 +523,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="DFv-ah-LiQ"/>
+        <segue reference="B8h-iB-dfW"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="email_icon" width="30" height="30"/>
