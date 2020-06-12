@@ -26,7 +26,7 @@ class MostSharedNewsTableViewController: UITableViewController, ViewModelChangea
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 250
+        tableView.estimatedRowHeight = 300
         showLoading(withMessage: "Loading...")
         setupCoreDataSavingObserver()
         getFavNewsForBadge()
@@ -141,7 +141,7 @@ class MostSharedNewsTableViewController: UITableViewController, ViewModelChangea
         newsViewModel.getNewsFromWeb(newsType: .getMostSharedNews) { result in
             switch result {
             case .success(_):
-                self.hideLoaderWithSuccess(withMessage: "")
+                self.hideLoading()
                 self.setupCellsFavoriteIcons()
                 DispatchQueue.main.async {
                     self.tableView.reloadData()

@@ -41,7 +41,7 @@ extension Progressable where Self: UIViewController {
     
     func hideLoaderWithSuccess(withMessage message: String?) {
         hideLoading()
-        showHUD(withMessage: message, hideAfter: 0)
+        showHUD(withMessage: message)
     }
     
     func hideLoaderWithError(withMessage message: String?) {
@@ -73,5 +73,4 @@ extension Progressable where Self: UIViewController {
             progressHUD.hide(animated: true, afterDelay: hideAfter)
         }
     }
-    
 }

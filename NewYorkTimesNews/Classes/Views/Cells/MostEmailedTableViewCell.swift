@@ -35,18 +35,8 @@ class MostEmailedNewsTableViewCell: UITableViewCell {
         titleNewsLabel.text = news.title
         isFavoriteButton.isSelected = news.isFavorite
         publishedDateLabel.text = news.publishedDate
-        iconNewsImageView.sd_setImage(with: URL(string: news.iconLink ?? ""), placeholderImage: UIImage(named: "news_icon_placeholder")) { (_, _, _, _) in
-            /// 8 - 223
-            /// 11 - 249
-            
-            //print(self.iconNewsImageView.image?.size.width)
-            //self.iconNewsHeightConstraint.constant = 249
-            //print(self.superview?.frame.width)
-            //self.layoutSubviews()
-            //self.layoutIfNeeded()
-        }
+        iconNewsImageView.sd_setImage(with: URL(string: news.iconLink ?? ""), placeholderImage: UIImage(named: "news_icon_placeholder"))
     }
-    
     
     @IBAction func makeFavoriteButton(_ sender: UIButton) {
         

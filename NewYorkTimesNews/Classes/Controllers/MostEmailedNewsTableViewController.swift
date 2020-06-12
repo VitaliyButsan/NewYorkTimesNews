@@ -149,7 +149,7 @@ class MostEmailedNewsTableViewController: UITableViewController, ViewModelChange
         newsViewModel.getNewsFromWeb(newsType: .getMostEmailedNews) { result in
             switch result {
             case .success(_):
-                self.hideLoaderWithSuccess(withMessage: "")
+                self.hideLoading()
                 self.setupCellsFavoriteIcons()
                 DispatchQueue.main.async {
                     self.tableView.reloadData()

@@ -77,7 +77,6 @@
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="JV9-rC-aQc"/>
-                                                        <constraint firstAttribute="width" constant="110" id="wsa-1j-RIo"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -96,6 +95,7 @@
                                                 <constraint firstItem="Llw-eo-yll" firstAttribute="leading" secondItem="syk-KC-IlL" secondAttribute="leading" id="nHZ-eC-cYI"/>
                                                 <constraint firstItem="9uo-4l-0bd" firstAttribute="trailing" secondItem="Llw-eo-yll" secondAttribute="trailing" id="pT2-HR-ecM"/>
                                                 <constraint firstItem="Llw-eo-yll" firstAttribute="top" secondItem="XXA-pS-pyM" secondAttribute="bottom" constant="-46" id="rXp-AQ-1TY"/>
+                                                <constraint firstItem="9uo-4l-0bd" firstAttribute="leading" secondItem="Llw-eo-yll" secondAttribute="trailing" constant="-110" id="rzs-UJ-Gvn"/>
                                                 <constraint firstAttribute="bottom" secondItem="Llw-eo-yll" secondAttribute="bottom" id="w4D-18-WlP"/>
                                                 <constraint firstAttribute="trailing" secondItem="8zq-3W-1Wg" secondAttribute="trailing" constant="16" id="zT4-Fb-wbX"/>
                                             </constraints>
