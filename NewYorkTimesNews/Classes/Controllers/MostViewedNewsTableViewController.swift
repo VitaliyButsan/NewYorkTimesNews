@@ -17,7 +17,7 @@ class MostViewedNewsTableViewController: UITableViewController, ViewModelChangea
     private let coreDataNewsViewModel = CoreDataNewsViewModel()
     private let badgeTag = 777
     
-    let myRefreshControl: UIRefreshControl = {
+    let newRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshNews(_:)), for: .valueChanged)
         return refreshControl
@@ -25,18 +25,24 @@ class MostViewedNewsTableViewController: UITableViewController, ViewModelChangea
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = UITableView.automaticDimension
+        
         tableView.estimatedRowHeight = 300
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.refreshControl = newRefreshControl
+        
         showLoading(withMessage: "Loading...")
         setupCoreDataSavingObserver()
         getFavNewsForBadge()
         getWebNews()
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
         setupCellsFavoriteIcons()
-        tableView.reloadData()
     }
     
     @objc func refreshNews(_ sender: UIRefreshControl) {

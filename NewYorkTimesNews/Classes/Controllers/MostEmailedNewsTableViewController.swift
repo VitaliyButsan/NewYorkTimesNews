@@ -30,20 +30,22 @@ class MostEmailedNewsTableViewController: UITableViewController, ViewModelChange
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.estimatedRowHeight = 300
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.refreshControl = newRefreshControl
+        
         showLoading(withMessage: "Loading...")
         setupCoreDataSavingObserver()
         getFavNewsForBadge()
         getWebNews()
-        
-        tableView.estimatedRowHeight = 300
-        tableView.rowHeight = UITableView.automaticDimension
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
         setupCellsFavoriteIcons()
-        tableView.reloadData()
     }
     
     @objc func refreshNews(_ sender: UIRefreshControl) {
