@@ -41,7 +41,7 @@ class MostSharedNewsTableViewCell: UITableViewCell {
         } else {
             isFavoriteButton.isSelected = true
             let currentNews = getCurrentNews()
-            coreDataNewsModel.seveFavNewsToDB(news: currentNews)
+            coreDataNewsModel.saveFavNewsToDB(news: currentNews)
         }
         
         delegate?.makeFavorite(cell: self)

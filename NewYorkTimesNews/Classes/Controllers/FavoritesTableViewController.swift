@@ -11,7 +11,7 @@ import SafariServices
 
 class FavoritesTableViewController: UITableViewController {
     
-    let coreDataNewsViewModel = CoreDataNewsViewModel()
+    private let coreDataNewsViewModel = CoreDataNewsViewModel()
     var cameFromTVC: ViewModelChangeable?
 
     override func viewDidLoad() {

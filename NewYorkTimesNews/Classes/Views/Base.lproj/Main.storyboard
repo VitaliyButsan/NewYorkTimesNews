@@ -54,7 +54,7 @@
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Llw-eo-yll">
                                                     <rect key="frame" x="0.0" y="29" width="374" height="249"/>
-                                                    <color key="backgroundColor" red="0.92020159960000003" green="0.90649249480000005" blue="0.8086665059" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="249" id="pBg-AF-5A0"/>
                                                     </constraints>
@@ -115,9 +115,7 @@
                                         <constraint firstAttribute="trailing" secondItem="syk-KC-IlL" secondAttribute="trailing" constant="20" id="uTp-KQ-SPC"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <outlet property="iconNewsHeightConstraint" destination="pBg-AF-5A0" id="PAo-nt-g7r"/>
                                     <outlet property="iconNewsImageView" destination="Llw-eo-yll" id="PWk-FI-VUa"/>
                                     <outlet property="isFavoriteButton" destination="XXA-pS-pyM" id="0iu-EJ-rCP"/>
                                     <outlet property="publishedDateLabel" destination="9uo-4l-0bd" id="3hw-k5-zle"/>
@@ -144,7 +142,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="favoritesButton" destination="hfd-9a-Gx1" id="pez-0O-Ayk"/>
+                        <outlet property="favoritesBarButton" destination="hfd-9a-Gx1" id="pez-0O-Ayk"/>
                         <segue destination="oN2-0H-otk" kind="show" identifier="segueToFavorites" id="DFv-ah-LiQ"/>
                     </connections>
                 </tableViewController>
@@ -238,7 +236,6 @@
                                         <constraint firstItem="ouw-zr-kYq" firstAttribute="top" secondItem="ZlC-a2-qc8" secondAttribute="top" constant="11" id="dUk-6h-0e3"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="iconNewsImageView" destination="alz-Kf-6e9" id="WpP-iR-5jt"/>
                                     <outlet property="isFavoriteButton" destination="gA8-nb-L2C" id="aFq-Yt-qaL"/>
@@ -266,7 +263,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="favoritesButton" destination="Jp5-nL-T2w" id="klz-72-MVi"/>
+                        <outlet property="favoritesBarButton" destination="Jp5-nL-T2w" id="klz-72-MVi"/>
                         <segue destination="oN2-0H-otk" kind="show" identifier="segueToFavorites" id="XIS-p7-DOh"/>
                     </connections>
                 </tableViewController>
@@ -425,7 +422,6 @@
                                         <constraint firstItem="xnR-AK-xL4" firstAttribute="leading" secondItem="XrL-uT-8um" secondAttribute="leading" constant="20" id="lLC-RM-pMj"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="iconNewsImageView" destination="ff6-Oa-GoU" id="8wh-04-GX2"/>
                                     <outlet property="isFavoriteButton" destination="VF5-vv-0mI" id="A14-Ji-gJS"/>
@@ -453,7 +449,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="favoritesButton" destination="pve-Rw-Lzd" id="h5F-Wz-qaj"/>
+                        <outlet property="favoritesBarButton" destination="pve-Rw-Lzd" id="h5F-Wz-qaj"/>
                         <segue destination="oN2-0H-otk" kind="show" identifier="segueToFavorites" id="B8h-iB-dfW"/>
                     </connections>
                 </tableViewController>
@@ -523,7 +519,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="XIS-p7-DOh"/>
+        <segue reference="DFv-ah-LiQ"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="email_icon" width="30" height="30"/>

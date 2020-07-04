@@ -19,7 +19,6 @@ class MostViewedNewsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var isFavoriteButton: UIButton!
     
-    
     private let coreDataNewsModel = CoreDataNewsViewModel()
     private var iconLink: String?
     private var newsLink = ""
@@ -34,8 +33,6 @@ class MostViewedNewsTableViewCell: UITableViewCell {
         iconNewsImageView.sd_setImage(with: URL(string: news.iconLink ?? ""), placeholderImage: UIImage(named: "news_icon_placeholder"))
     }
     
-    
-    
     @IBAction func makeFavoriteButton(_ sender: UIButton) {
     
         if isFavoriteButton.isSelected {
@@ -44,7 +41,7 @@ class MostViewedNewsTableViewCell: UITableViewCell {
         } else {
             isFavoriteButton.isSelected = true
             let currentNews = getCurrentNews()
-            coreDataNewsModel.seveFavNewsToDB(news: currentNews)
+            coreDataNewsModel.saveFavNewsToDB(news: currentNews)
         }
         
         delegate?.makeFavorite(cell: self)

@@ -42,15 +42,15 @@ class CoreDataManager {
     func writeNews(news: NewsCoreDataModel) {
         if !isExist(news) {
             self.delegate.persistentContainer.performBackgroundTask { context in
-                    guard let newsEntity = NSEntityDescription.entity(forEntityName: "News", in: context) else { return }
-                    let newsManagedObject = NSManagedObject(entity: newsEntity, insertInto: context) as! News
-                    newsManagedObject.title = news.title
-                    newsManagedObject.iconURL = news.iconLink
-                    newsManagedObject.iconData = news.iconData
-                    newsManagedObject.newsLink = news.newsLink
-                    newsManagedObject.isFavorite = news.isFavorite
-                    newsManagedObject.publishedDate = news.publishedDate
-                    self.save(context: context)
+                guard let newsEntity = NSEntityDescription.entity(forEntityName: "News", in: context) else { return }
+                let newsManagedObject = NSManagedObject(entity: newsEntity, insertInto: context) as! News
+                newsManagedObject.title = news.title
+                newsManagedObject.iconURL = news.iconLink
+                newsManagedObject.iconData = news.iconData
+                newsManagedObject.newsLink = news.newsLink
+                newsManagedObject.isFavorite = news.isFavorite
+                newsManagedObject.publishedDate = news.publishedDate
+                self.save(context: context)
             }
         }
     }

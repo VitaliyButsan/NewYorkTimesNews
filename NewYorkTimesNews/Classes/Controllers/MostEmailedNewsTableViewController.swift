@@ -15,13 +15,13 @@ protocol ViewModelChangeable {
 
 class MostEmailedNewsTableViewController: UITableViewController, ViewModelChangeable, Progressable {
     
-    @IBOutlet weak var favoritesButton: UIButton!
+    @IBOutlet weak var favoritesBarButton: UIButton!
     
     var newsViewModel = WebNewsViewModel()
     private let coreDataNewsViewModel = CoreDataNewsViewModel()
-    let badgeTag = 777
+    private let badgeTag = 777
     
-    let newRefreshControl: UIRefreshControl = {
+    private let newRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshNews(_:)), for: .valueChanged)
         return refreshControl
@@ -34,7 +34,7 @@ class MostEmailedNewsTableViewController: UITableViewController, ViewModelChange
         tableView.rowHeight = UITableView.automaticDimension
         tableView.refreshControl = newRefreshControl
         
-        showLoading(withMessage: "Loading...")
+        showLoader(withMessage: "Loading...")
         setupCoreDataSavingObserver()
         getFavNewsForBadge()
         getWebNews()
@@ -99,7 +99,7 @@ class MostEmailedNewsTableViewController: UITableViewController, ViewModelChange
         let favNewsCount = coreDataNewsViewModel.news.count
         DispatchQueue.main.async {
             if favNewsCount > 0 {
-                if let badge = self.favoritesButton.viewWithTag(self.badgeTag) as? UILabel {
+                if let badge = self.favoritesBarButton.viewWithTag(self.badgeTag) as? UILabel {
                     badge.text = String(favNewsCount)
                 } else {
                     self.showBadge(withCount: favNewsCount)
@@ -117,18 +117,18 @@ class MostEmailedNewsTableViewController: UITableViewController, ViewModelChange
     private func showBadge(withCount count: Int) {
         let badgeSize: CGFloat = 20
         let badge = badgeLabel(withCount: count, badgeSize: badgeSize)
-        favoritesButton.addSubview(badge)
+        favoritesBarButton.addSubview(badge)
 
         NSLayoutConstraint.activate([
-            badge.leftAnchor.constraint(equalTo: favoritesButton.leftAnchor, constant: badgeSize),
-            badge.topAnchor.constraint(equalTo: favoritesButton.topAnchor, constant: -5),
+            badge.leftAnchor.constraint(equalTo: favoritesBarButton.leftAnchor, constant: badgeSize),
+            badge.topAnchor.constraint(equalTo: favoritesBarButton.topAnchor, constant: -5),
             badge.widthAnchor.constraint(equalToConstant: badgeSize),
             badge.heightAnchor.constraint(equalToConstant: badgeSize)
         ])
     }
     
     private func removeBadge() {
-        if let badge = favoritesButton.viewWithTag(badgeTag) {
+        if let badge = favoritesBarButton.viewWithTag(badgeTag) {
             badge.removeFromSuperview()
         }
     }

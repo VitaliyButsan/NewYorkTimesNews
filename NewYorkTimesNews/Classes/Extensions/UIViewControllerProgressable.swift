@@ -7,7 +7,8 @@
 ///  Created by Danijel Kecman on 25/5/19.
 ///  Copyright © 2017 Danijel Kecman. All rights reserved.
 
-/// https://github.com/danijelkecman/hello-fresh/blob/ad7a00e268eb7e049460afcf255191733bc554d1/HelloFresh/Common/Protocols/Progressable.swift
+///  source
+///  https://github.com/danijelkecman/hello-fresh/blob/ad7a00e268eb7e049460afcf255191733bc554d1/HelloFresh/Common/Protocols/Progressable.swift
 ///
 /// ====================================================
 
@@ -15,7 +16,7 @@ import MBProgressHUD
 
 protocol Progressable {
     func showLoading()
-    func showLoading(withMessage message: String)
+    func showLoader(withMessage message: String)
     func hideLoading()
     func hideLoaderWithSuccess(withMessage message: String?)
     func hideLoaderWithError(withMessage message: String?)
@@ -24,10 +25,10 @@ protocol Progressable {
 extension Progressable where Self: UIViewController {
     
     func showLoading() {
-        showLoading(withMessage: "")
+        showLoader(withMessage: "")
     }
     
-    func showLoading(withMessage message: String) {
+    func showLoader(withMessage message: String) {
         showHUD(withMessage: message)
     }
     

@@ -22,8 +22,6 @@ class MostEmailedNewsTableViewCell: UITableViewCell {
     @IBOutlet weak var publishedDateLabel: UILabel!
     @IBOutlet weak var isFavoriteButton: UIButton!
     
-    @IBOutlet weak var iconNewsHeightConstraint: NSLayoutConstraint!
-    
     private let coreDataNewsModel = CoreDataNewsViewModel()
     private var iconLink: String?
     private var newsLink = ""
@@ -46,7 +44,7 @@ class MostEmailedNewsTableViewCell: UITableViewCell {
         } else {
             isFavoriteButton.isSelected = true
             let currentNews = getCurrentNews()
-            coreDataNewsModel.seveFavNewsToDB(news: currentNews)
+            coreDataNewsModel.saveFavNewsToDB(news: currentNews)
         }
         
         delegate?.makeFavorite(cell: self)
