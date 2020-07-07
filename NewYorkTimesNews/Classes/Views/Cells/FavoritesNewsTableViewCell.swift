@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavoritesTableViewCell: UITableViewCell {
+class FavoritesNewsTableViewCell: UITableViewCell {
 
     static let cellID = "FavoritesCell"
     

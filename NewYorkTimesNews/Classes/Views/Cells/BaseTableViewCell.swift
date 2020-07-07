@@ -1,5 +1,5 @@
 //
-//  MostViewedTableViewCell.swift
+//  MostEmailedTableViewCell.swift
 //  NewYorkTimesNews
 //
 //  Created by Vitaliy on 29.05.2020.
@@ -9,14 +9,19 @@
 import UIKit
 import SDWebImage
 
-class MostViewedNewsTableViewCell: UITableViewCell {
+protocol IsFavoriteMakeble {
+    func makeFavorite(cell: UITableViewCell)
+}
+
+class BaseTableViewCell: UITableViewCell {
     
-    static let cellID = "MostViewedNewsCell"
+    class var cellID: String {
+        return ""
+    }
     
     @IBOutlet weak var titleNewsLabel: UILabel!
     @IBOutlet weak var iconNewsImageView: UIImageView!
     @IBOutlet weak var publishedDateLabel: UILabel!
-    
     @IBOutlet weak var isFavoriteButton: UIButton!
     
     private let coreDataNewsModel = CoreDataNewsViewModel()
@@ -34,7 +39,6 @@ class MostViewedNewsTableViewCell: UITableViewCell {
     }
     
     @IBAction func makeFavoriteButton(_ sender: UIButton) {
-    
         if isFavoriteButton.isSelected {
             isFavoriteButton.isSelected = false
             coreDataNewsModel.delNewsByTitle(newsTitle: titleNewsLabel.text!)
@@ -43,15 +47,14 @@ class MostViewedNewsTableViewCell: UITableViewCell {
             let currentNews = getCurrentNews()
             coreDataNewsModel.saveFavNewsToDB(news: currentNews)
         }
-        
         delegate?.makeFavorite(cell: self)
     }
     
     private func getCurrentNews() -> NewsCoreDataModel {
-        guard let title = titleNewsLabel.text  else { return NewsCoreDataModel.placeholder }
-        guard let iconData = iconNewsImageView.image?.pngData() else { return NewsCoreDataModel.placeholder }
-        guard let iconLink = iconLink else { return NewsCoreDataModel.placeholder }
-        guard let publishedData = publishedDateLabel.text else { return NewsCoreDataModel.placeholder }
+        guard let title = titleNewsLabel.text,
+              let iconData = iconNewsImageView.image?.pngData(),
+              let iconLink = iconLink,
+              let publishedData = publishedDateLabel.text else { return NewsCoreDataModel.placeholder }
         
         let currentNews = NewsCoreDataModel(title: title,
                                             iconData: iconData,

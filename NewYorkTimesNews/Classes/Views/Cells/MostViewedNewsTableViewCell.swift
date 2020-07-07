@@ -1,5 +1,5 @@
 //
-//  MostSharedNewsTableViewCell.swift
+//  MostViewedTableViewCell.swift
 //  NewYorkTimesNews
 //
 //  Created by Vitaliy on 29.05.2020.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-class MostSharedNewsTableViewCell: BaseTableViewCell {
+class MostViewedNewsTableViewCell: BaseTableViewCell {
     
     override class var cellID: String {
-        return "MostSharedNewsCell"
+        return "MostViewedNewsCell"
     }
 }

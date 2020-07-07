@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-class FavoritesTableViewController: UITableViewController {
+class FavoritesNewsTableViewController: UITableViewController {
     
     private let coreDataNewsViewModel = CoreDataNewsViewModel()
     var cameFromTVC: ViewModelChangeable?
@@ -35,7 +35,7 @@ class FavoritesTableViewController: UITableViewController {
 
 // MARK - Table view delegate
 
-extension FavoritesTableViewController {
+extension FavoritesNewsTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let newsLink = coreDataNewsViewModel.news[indexPath.row].newsLink
@@ -55,14 +55,14 @@ extension FavoritesTableViewController {
 
 // MARK: - Table view data source
 
-extension FavoritesTableViewController {
+extension FavoritesNewsTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return coreDataNewsViewModel.news.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FavoritesTableViewCell.cellID, for: indexPath) as! FavoritesTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: FavoritesNewsTableViewCell.cellID, for: indexPath) as! FavoritesNewsTableViewCell
         let favNews = coreDataNewsViewModel.news[indexPath.row]
         cell.updateCell(news: favNews)
         return cell
@@ -74,7 +74,7 @@ extension FavoritesTableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            guard let editingCell = tableView.cellForRow(at: indexPath) as? FavoritesTableViewCell else { return }
+            guard let editingCell = tableView.cellForRow(at: indexPath) as? FavoritesNewsTableViewCell else { return }
             guard let editingCellTitle = editingCell.titleLabel?.text else { return }
             coreDataNewsViewModel.delNewsByTitle(newsTitle: editingCellTitle)
             coreDataNewsViewModel.news.remove(at: indexPath.row)
@@ -89,7 +89,7 @@ extension FavoritesTableViewController {
 
 // MARK: - SFSafariViewControllerDelegate
 
-extension FavoritesTableViewController: SFSafariViewControllerDelegate {
+extension FavoritesNewsTableViewController: SFSafariViewControllerDelegate {
     
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         controller.dismiss(animated: true, completion: nil)
