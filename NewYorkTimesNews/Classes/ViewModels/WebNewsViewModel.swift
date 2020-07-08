@@ -27,6 +27,7 @@ class WebNewsViewModel {
         for webNewsModel in webNewsModels {
             var iconLink = ""
             var iconData = Data()
+            let publishedDate = String(webNewsModel.publishedDate.components(separatedBy: "-").reversed().joined(separator: "-"))
             
             if let urlString = webNewsModel.media.first?.metaData.last?.iconURL, let url = URL(string: urlString) {
                 iconLink = urlString
@@ -43,7 +44,7 @@ class WebNewsViewModel {
                                                      iconData: iconData,
                                                      iconLink: iconLink,
                                                      newsLink: webNewsModel.url,
-                                                     publishedDate: webNewsModel.publishedDate,
+                                                     publishedDate: publishedDate,
                                                      isFavorite: false)
             result.append(newCoreDataModel)
         }
