@@ -6,11 +6,13 @@
 //  Copyright © 2020 Vitaliy. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class MostEmailedNewsTableViewController: BaseTableViewController<MostEmailedNewsTableViewCell> {
     
     override var routerState: Router {
         return .getMostEmailedNews
     }
+    
+    @IBOutlet weak var faveritesBarButton: UIButton!
 }

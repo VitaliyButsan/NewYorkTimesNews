@@ -136,13 +136,13 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="heart30x30"/>
                                 <connections>
-                                    <action selector="favoritesButton:" destination="imB-j8-IbY" eventType="touchUpInside" id="nsx-RU-nVr"/>
+                                    <action selector="favoritesButton:" destination="imB-j8-IbY" eventType="touchUpInside" id="a17-qh-Ihw"/>
                                 </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="favoritesBarButton" destination="hfd-9a-Gx1" id="pez-0O-Ayk"/>
+                        <outlet property="favoritesBarButton" destination="hfd-9a-Gx1" id="GCR-pW-Y5P"/>
                         <segue destination="oN2-0H-otk" kind="show" identifier="segueToFavorites" id="DFv-ah-LiQ"/>
                     </connections>
                 </tableViewController>
@@ -257,13 +257,13 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="heart30x30"/>
                                 <connections>
-                                    <action selector="favoritesButton:" destination="wWj-P5-alC" eventType="touchUpInside" id="eT1-xt-fq3"/>
+                                    <action selector="favoritesButton:" destination="wWj-P5-alC" eventType="touchUpInside" id="79b-el-bJH"/>
                                 </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="favoritesBarButton" destination="Jp5-nL-T2w" id="vGH-HV-eUv"/>
+                        <outlet property="favoritesBarButton" destination="Jp5-nL-T2w" id="nIK-Ic-Toe"/>
                         <segue destination="oN2-0H-otk" kind="show" identifier="segueToFavorites" id="XIS-p7-DOh"/>
                     </connections>
                 </tableViewController>
@@ -443,13 +443,13 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="heart30x30"/>
                                 <connections>
-                                    <action selector="favoritesButton:" destination="PjT-db-rTR" eventType="touchUpInside" id="6tu-aW-xw6"/>
+                                    <action selector="favoritesButton:" destination="PjT-db-rTR" eventType="touchUpInside" id="99R-Yq-Bkv"/>
                                 </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="favoritesBarButton" destination="pve-Rw-Lzd" id="jzC-p7-5Sj"/>
+                        <outlet property="favoritesBarButton" destination="pve-Rw-Lzd" id="76n-Ga-ZIs"/>
                         <segue destination="oN2-0H-otk" kind="show" identifier="segueToFavorites" id="B8h-iB-dfW"/>
                     </connections>
                 </tableViewController>
@@ -519,7 +519,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="DFv-ah-LiQ"/>
+        <segue reference="B8h-iB-dfW"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="email_icon" width="30" height="30"/>

@@ -198,7 +198,8 @@ class BaseTableViewController<T: BaseTableViewCell>: UITableViewController, View
     }
     
     private func showLinkWithSafari(link: String) {
-        let safariVC = SFSafariViewController(url: URL(string: link)!)
+        guard let linkURL = URL(string: link) else { return }
+        let safariVC = SFSafariViewController(url: linkURL)
         self.present(safariVC, animated: true, completion: nil)
         safariVC.delegate = self as? SFSafariViewControllerDelegate
     }
@@ -209,7 +210,7 @@ class BaseTableViewController<T: BaseTableViewCell>: UITableViewController, View
 extension BaseTableViewController {
     
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        controller.dismiss(animated: true, completion: nil)
+        controller.dismiss(animated: true)
     }
 }
 

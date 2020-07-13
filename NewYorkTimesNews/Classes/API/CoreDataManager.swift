@@ -22,13 +22,13 @@ class CoreDataManager {
             do {
                 let result = try context.fetch(fetchRequest) as! [News]
                 for newsEntity in result {
-                    let newNews = NewsCoreDataModel(title: newsEntity.title,
+                    let savedNews = NewsCoreDataModel(title: newsEntity.title,
                                                     iconData: newsEntity.iconData,
                                                     iconLink: newsEntity.iconURL,
                                                     newsLink: newsEntity.newsLink,
                                                     publishedDate: newsEntity.publishedDate,
                                                     isFavorite: newsEntity.isFavorite)
-                    news.append(newNews)
+                    news.append(savedNews)
                 }
                 callback(news)
             } catch {

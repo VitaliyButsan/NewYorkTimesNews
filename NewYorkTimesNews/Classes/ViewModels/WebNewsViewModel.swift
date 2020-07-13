@@ -22,7 +22,7 @@ class WebNewsViewModel {
     }
     
     private func convertToNewsCoreDataModel(webNewsModels: [WebNewsInfo]) -> [NewsCoreDataModel] {
-        var result: [NewsCoreDataModel] = []
+        var results: [NewsCoreDataModel] = []
         
         for webNewsModel in webNewsModels {
             var iconLink = ""
@@ -31,7 +31,6 @@ class WebNewsViewModel {
             
             if let urlString = webNewsModel.media.first?.metaData.last?.iconURL, let url = URL(string: urlString) {
                 iconLink = urlString
-                
                 do {
                     let data = try Data(contentsOf: url)
                     iconData = data
@@ -40,16 +39,15 @@ class WebNewsViewModel {
                 }
             }
             
-            let newCoreDataModel = NewsCoreDataModel(title: webNewsModel.title,
-                                                     iconData: iconData,
-                                                     iconLink: iconLink,
-                                                     newsLink: webNewsModel.url,
-                                                     publishedDate: publishedDate,
-                                                     isFavorite: false)
-            result.append(newCoreDataModel)
+            let newCoreDataNewsModel = NewsCoreDataModel(title: webNewsModel.title,
+                                                         iconData: iconData,
+                                                         iconLink: iconLink,
+                                                         newsLink: webNewsModel.url,
+                                                         publishedDate: publishedDate,
+                                                         isFavorite: false)
+            results.append(newCoreDataNewsModel)
         }
-        
-        return result
+        return results
     }
 }
 

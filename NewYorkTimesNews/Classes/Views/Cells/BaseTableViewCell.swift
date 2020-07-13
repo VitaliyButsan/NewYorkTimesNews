@@ -15,19 +15,19 @@ protocol IsFavoriteMakeble {
 
 class BaseTableViewCell: UITableViewCell {
     
-    class var cellID: String {
-        return ""
-    }
+    private let coreDataNewsModel = CoreDataNewsViewModel()
     
     @IBOutlet weak var titleNewsLabel: UILabel!
     @IBOutlet weak var iconNewsImageView: UIImageView!
     @IBOutlet weak var publishedDateLabel: UILabel!
     @IBOutlet weak var isFavoriteButton: UIButton!
     
-    private let coreDataNewsModel = CoreDataNewsViewModel()
+    var delegate: IsFavoriteMakeble?
     private var iconLink: String?
     private var newsLink = ""
-    var delegate: IsFavoriteMakeble?
+    class var cellID: String {
+        return ""
+    }
     
     func updateCell(news: NewsCoreDataModel) {
         iconLink = news.iconLink
